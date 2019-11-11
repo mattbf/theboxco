@@ -7,7 +7,8 @@ We are attempting to design a more secure, re-usable, and data rich packaging so
 
 ### users
 
-Users are split by permissions and have the following high-level properties:  
+Users are split by permissions and have the following high-level properties:
+  
 **role** // one of Business, Delivery, Recipient, or Demo  
 **boxCollections** // for Delivery parties - a collection of boxes that they must delivery  
 **authBox** // A list of boxes that this user currently has authorization access to  
@@ -30,7 +31,8 @@ eg. Business user
 
 ### Boxes
 
-Boxes are individual units that carry their own authentication, info, and associated parties    
+Boxes are individual units that carry their own authentication, info, and associated parties
+
 **shippingInfo** // an object that stores reference to a recipient user as well as address and package data    
 **data** // a data object that stores package statuses and sensor data    
 **authentication** // The current authentication method and authorized users    
