@@ -30,10 +30,10 @@ eg. Business user
 
 ### Boxes
 
-Boxes are individual units that carry their own authentication, info, and associated parties  
-**shippingInfo** // an object that stores reference to a recipient user as well as address and package data  
-**data** // a data object that stores package statuses and sensor data  
-**authentication** // The current authentication method and authorized users  
+Boxes are individual units that carry their own authentication, info, and associated parties    
+**shippingInfo** // an object that stores reference to a recipient user as well as address and package data    
+**data** // a data object that stores package statuses and sensor data    
+**authentication** // The current authentication method and authorized users    
 
 
 eg. Box that is on route to a recipient
