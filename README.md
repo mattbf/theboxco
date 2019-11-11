@@ -30,8 +30,8 @@ eg. Business user
 
 ### Boxes
 
-Boxes are individual units that carry their own authentication, info, and associated parties
-**shippingInfo** // an object that stores reference to a recipient user as well as address and package data
+Boxes are individual units that carry their own authentication, info, and associated parties  
+**shippingInfo** // an object that stores reference to a recipient user as well as address and package data  
 **data** // a data object that stores package statuses and sensor data  
 **authentication** // The current authentication method and authorized users  
 
@@ -73,10 +73,6 @@ eg. Box that is on route to a recipient
           "GPS": [89.239230, 19.023832],
           "timestamp": 157367012343,
         },
-        {
-          "GPS": [90.239230, 19.011897],
-          "timestamp": 1573500164410,
-        },
       ],
       "accelerometer": 1234876,
       "accelHist": [
@@ -90,11 +86,6 @@ eg. Box that is on route to a recipient
           "timestamp": 1573500164410,
           "isTamper": false,
         },
-        {
-          "accel": 1234567,
-          "timestamp": 1573500164410,
-          "isTamper": false,
-        }
       ],
     }
   },
