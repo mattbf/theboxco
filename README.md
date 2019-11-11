@@ -8,10 +8,10 @@ We are attempting to design a more secure, re-usable, and data rich packaging so
 ### users
 
 Users are split by permissions and have the following high-level properties:
-**role** // one of Business, Delivery, Recipient, or Demo
-**boxCollections** // for Delivery parties - a collection of boxes that they must delivery
-**authBox** // A list of boxes that this user currently has authorization access to
-**address** // A recipient address object
+**role** // one of Business, Delivery, Recipient, or Demo  
+**boxCollections** // for Delivery parties - a collection of boxes that they must delivery  
+**authBox** // A list of boxes that this user currently has authorization access to  
+**address** // A recipient address object  
 
 eg. Business user
 
