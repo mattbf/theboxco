@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { render } from "react-dom";
+import {
+  Header,
+  HeaderName,
+  HeaderNavigation,
+  HeaderMenu,
+  HeaderMenuItem
+} from "carbon-components-react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './app.scss';
 
-export default App;
+
+const App = () => (
+  <div className="container">
+    <Header aria-label="IBM Platform Name">
+      <HeaderName href="#" prefix="IBM">
+        [Platform]
+      </HeaderName>
+      <HeaderNavigation aria-label="IBM [Platform]">
+        <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+        <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+        <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+        <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+          <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+          <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+          <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+        </HeaderMenu>
+      </HeaderNavigation>
+    </Header>
+  </div>
+);
+
+export default App
