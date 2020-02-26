@@ -4,9 +4,9 @@ We are attempting to design a more secure, re-usable, and data rich packaging so
 
 ## Technologies used
 
-[React](https://reactjs.org/)
-[Twilio Machine to Machine Messaging and SMS](https://www.twilio.com/)
-[Carbon Design](https://www.carbondesignsystem.com/)
+[React](https://reactjs.org/)  
+[Twilio Machine to Machine Messaging and SMS](https://www.twilio.com/)  
+[Carbon Design](https://www.carbondesignsystem.com/)  
 
 ## Data Structure
 
