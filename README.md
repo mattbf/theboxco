@@ -2,13 +2,19 @@
 
 We are attempting to design a more secure, re-usable, and data rich packaging solution to make life better for businesses, delivery parties, and recipients.
 
+## Technologies used
+
+[React](https://reactjs.org/)
+[Twilio Machine to Machine Messaging and SMS](https://www.twilio.com/)
+[Carbon Design](https://www.carbondesignsystem.com/)
+
 ## Data Structure
 
 
 ### users
 
 Users are split by permissions and have the following high-level properties:
-  
+
 **role** // one of Business, Delivery, Recipient, or Demo  
 **boxCollections** // for Delivery parties - a collection of boxes that they must delivery  
 **authBox** // A list of boxes that this user currently has authorization access to  
