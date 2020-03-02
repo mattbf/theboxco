@@ -1,6 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import './app.scss';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -55,7 +54,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div style={{display: 'flex'}}>
         <Router>
-            <Route exact path="/">
+            <Route path="/">
               <Home/>
             </Route>
         </Router>

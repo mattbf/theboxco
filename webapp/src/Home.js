@@ -165,12 +165,12 @@ function Home(){
   return(
     <div style={{display: 'flex'}}>
       <List>
-        <ListItemLink to="/" primary="Home" />
+        <ListItemLink to="/home" primary="Home" />
         <ListItemLink to="/map" primary="Map"/>
       </List>
       <Switch>
         <Route
-          path='/'
+          path='/home'
           render={(props) => <div>hello</div>}
           exact
         />
