@@ -21,7 +21,7 @@ import {
 
 const theme = createMuiTheme({
   palette: {
-    type: 'light',
+    type: 'dark',
     primary: {
       main: '#3D5AFE',
     },

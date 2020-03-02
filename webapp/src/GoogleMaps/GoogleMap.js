@@ -23,7 +23,7 @@ function GoogleMap() {
 
   const createGoogleMap = () =>{
     new window.google.maps.Map(googleMapRef.current, {
-      zoom: 16,
+      zoom: 10,
       center: {
         lat: 43.642567,
         lng: -79.387054,
@@ -41,11 +41,13 @@ function GoogleMap() {
   }
 
 
+
+
   return (
     <div
       id="google-map"
       ref={googleMapRef}
-      style={{ width: '400px', height: '300px' }}
+      style={{ width: '100%', height: '100%' }}
     />
   )
 }

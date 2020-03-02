@@ -28,7 +28,7 @@ import {
   ChevronRightIcon,
 } from '@material-ui/icons/Mail';
 
-import GoogleMap from './GoogleMaps/GoogleMap.js';
+import MapPage from './GoogleMaps/MapPage.js';
 
 import {
   BrowserRouter as Router,
@@ -132,33 +132,34 @@ function Home(){
 
 
   return(
-    <div style={{display: 'flex', height: '100%'}}>
-      <List style={{border: 'solid', height: '100%', backgroundColor: '#000008'}}>
+    <div style={{display: 'flex', height: '100%', width: '100%'}}>
+      <List style={{height: '100%', backgroundColor: '#000008', width: '110px'}}>
         <ListItemLink to="/home" primary="Home" />
         <ListItemLink to="/map" primary="Map"/>
       </List>
-      <div style={{width: '500px'}}>
-        <Paper style={{padding: '20px', margin: '15px'}}>
-          <Typography> Hello im paper</Typography>
-        </Paper>
-        <Button> Im a button </Button>
-        <Button variant="contained" color="primary"> Im a button </Button>
-        <TextField id="standard-basic" label="Standard" />
-        <Switch
-          checked={true}
-          value="checkedA"
-          inputProps={{ 'aria-label': 'secondary checkbox' }}
-        />
-      </div>
       <SwitchRouter>
         <Route
           path='/home'
-          render={(props) => <div>hello</div>}
+          render={(props) =>
+            <div style={{width: '500px'}}>
+              <Paper style={{padding: '20px', margin: '15px'}}>
+                <Typography> Hello im paper</Typography>
+              </Paper>
+              <Button> Im a button </Button>
+              <Button variant="contained" color="primary"> Im a button </Button>
+              <TextField id="standard-basic" label="Standard" />
+              <Switch
+                checked={true}
+                value="checkedA"
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
+              />
+            </div>
+          }
           exact
         />
         <Route
           path='/map'
-          render={(props) => <GoogleMap/>}
+          render={(props) => <MapPage/>}
           exact
         />
       </SwitchRouter>
