@@ -2,20 +2,16 @@ import React from "react";
 import { render } from "react-dom";
 import './app.scss';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
-import {
-  Header,
-  HeaderName,
-  HeaderNavigation,
-  HeaderMenu,
-  HeaderMenuItem,
-  Button,
-  Search
-} from "carbon-components-react";
 
-import { Content } from 'carbon-components-react/es/components/UIShell';
+import {
+  Drawer,
+  Search,
+} from "@material-ui/core";
 
 import GoogleMap from './GoogleMaps/GoogleMap.js';
+import Home from './Home.js';
 
 import {
   BrowserRouter as Router,
@@ -46,12 +42,7 @@ const theme = createMuiTheme({
     danger: 'orange',
   },
   typography: {
-    h4: {
-      fontFamily: "\"Work Sans\", \"Helvetica\", \"Arial\", sans-serif",
-      fontWeight: 700,
-      fontSize: 30
-    },
-    "fontFamily": "\"Dm Sans\", \"Helvetica\", \"Arial\", sans-serif",
+    "fontFamily": "\"IMB Plex Sans\", \"Helvetica\", \"Arial\", sans-serif",
     "fontSize": 14,
     "fontWeightLight": 400,
     "fontWeightRegular": 500,
@@ -69,8 +60,8 @@ const App = () => (
         <div style={{height: '100vh', width: '125px', backgroundColor: '#333'}}>
 
         </div>
+        <Home/>
         <div style={{paddingTop: '0px', width: '100%'}}>
-          <Search/>
           <Route exact path="/">
             <Button> Carbon Button </Button>
           </Route>
