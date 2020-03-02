@@ -1,19 +1,29 @@
 
-import React from "react";
+import React, {useState} from "react";
 import { render } from "react-dom";
-import './app.scss';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 import {
   Drawer,
   Search,
+  IconButton,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  List,
+  Button,
 } from "@material-ui/core";
 
 import {
   MailIcon,
-
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from '@material-ui/icons/Mail';
 
 import GoogleMap from './GoogleMaps/GoogleMap.js';
@@ -21,8 +31,9 @@ import GoogleMap from './GoogleMaps/GoogleMap.js';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Switch
 } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const theme = createMuiTheme({
@@ -120,41 +131,55 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function ListItemLink(props) {
+  const { icon, primary, to } = props;
+
+  const renderLink = React.useMemo(
+    () => React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
+    [to],
+  );
+
+  return (
+    <li>
+      <ListItem button component={renderLink}>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItem>
+    </li>
+  );
+}
+
 function Home(){
   const classes = useStyles();
+  const[open, setOpen] = useState(false)
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
 
   return(
     <div style={{display: 'flex'}}>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{<MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </Drawer>
+      <List>
+        <ListItemLink to="/" primary="Home" />
+        <ListItemLink to="/map" primary="Map"/>
+      </List>
+      <Switch>
+        <Route
+          path='/'
+          render={(props) => <div>hello</div>}
+          exact
+        />
+        <Route
+          path='/map'
+          render={(props) => <GoogleMap/>}
+          exact
+        />
+      </Switch>
     </div>
   )
 }

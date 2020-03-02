@@ -10,7 +10,6 @@ import {
   Search,
 } from "@material-ui/core";
 
-import GoogleMap from './GoogleMaps/GoogleMap.js';
 import Home from './Home.js';
 
 import {
@@ -51,29 +50,20 @@ const theme = createMuiTheme({
    }
 });
 
-const App = () => (
-  <ThemeProvider theme={theme}>
-    <div style={{display: 'flex'}}>
-      <Router>
-        <div>
-        </div>
-        <div style={{height: '100vh', width: '125px', backgroundColor: '#333'}}>
+function App() {
+  return(
+    <ThemeProvider theme={theme}>
+      <div style={{display: 'flex'}}>
+        <Router>
+            <Route exact path="/">
+              <Home/>
+            </Route>
+        </Router>
+      </div>
+    </ThemeProvider>
+  )
+}
 
-        </div>
-        <Home/>
-        <div style={{paddingTop: '0px', width: '100%'}}>
-          <Route exact path="/">
-            <Button> Carbon Button </Button>
-          </Route>
-          <Route path="/map">
-            <GoogleMap/>
-          </Route>
-        </div>
-      </Router>
-    </div>
-  </ThemeProvider>
-
-);
 
 export default App
 
