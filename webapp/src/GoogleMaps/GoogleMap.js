@@ -1,13 +1,13 @@
 import React, { useEffect, createRef } from 'react'
 require('dotenv').config()
 
-var GOOGLE_MAP_API_KEY = process.env.GOOGLE_MAP_API_KEY
+var GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY
 
 function GoogleMap() {
   var googleMapRef = React.createRef()
   var googleMap
   var marker
-  console.log(process.env.GOOGLE_MAP_API_KEY)
+  console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY)
 
   //init google map
   useEffect(() => {
