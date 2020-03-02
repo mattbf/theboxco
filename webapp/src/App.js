@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import {
   Drawer,
@@ -20,6 +21,7 @@ import {
 
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
     primary: {
       main: '#3D5AFE',
     },
@@ -52,7 +54,8 @@ const theme = createMuiTheme({
 function App() {
   return(
     <ThemeProvider theme={theme}>
-      <div style={{display: 'flex'}}>
+      <CssBaseline/>
+      <div style={{display: 'flex', height: '100vh'}}>
         <Router>
             <Route path="/">
               <Home/>

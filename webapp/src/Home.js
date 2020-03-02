@@ -1,7 +1,6 @@
 
 import React, {useState} from "react";
 import { render } from "react-dom";
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -18,6 +17,7 @@ import {
   Typography,
   List,
   Button,
+  Paper,
 } from "@material-ui/core";
 
 import {
@@ -163,11 +163,14 @@ function Home(){
 
 
   return(
-    <div style={{display: 'flex'}}>
-      <List>
+    <div style={{display: 'flex', height: '100%'}}>
+      <List style={{border: 'solid', height: '100%', backgroundColor: '#000008'}}>
         <ListItemLink to="/home" primary="Home" />
         <ListItemLink to="/map" primary="Map"/>
       </List>
+      <Paper>
+        <Typography> Hello im paper</Typography>
+      </Paper>
       <Switch>
         <Route
           path='/home'
