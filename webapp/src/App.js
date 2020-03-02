@@ -21,7 +21,7 @@ import {
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
     primary: {
       main: '#3D5AFE',
     },
@@ -42,13 +42,20 @@ const theme = createMuiTheme({
     danger: 'orange',
   },
   typography: {
-    "fontFamily": "\"IMB Plex Sans\", \"Helvetica\", \"Arial\", sans-serif",
+    "fontFamily": "\"IMB Plex Sans\", sans-serif",
     "fontSize": 14,
     "fontWeightLight": 400,
     "fontWeightRegular": 500,
     "fontWeightMedium": 700,
     "fontWeightBold": 900,
-   }
+    button: {
+      textTransform: "none",
+      fontWeight: 500
+    }
+  },
+  shape: {
+    borderRadius: 1
+  }
 });
 
 function App() {

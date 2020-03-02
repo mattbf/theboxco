@@ -18,6 +18,8 @@ import {
   List,
   Button,
   Paper,
+  Switch,
+  TextField
 } from "@material-ui/core";
 
 import {
@@ -31,44 +33,11 @@ import GoogleMap from './GoogleMaps/GoogleMap.js';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch as SwitchRouter
 } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#3D5AFE',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-    success: {
-      main: '#00c853',
-    },
-    info: {
-      main: '#00c853',
-    },
-    warning: {
-      main: '#00c853',
-    },
-  },
-  status: {
-    danger: 'orange',
-  },
-  typography: {
-    "fontFamily": "\"IMB Plex Sans\", \"Helvetica\", \"Arial\", sans-serif",
-    "fontSize": 14,
-    "fontWeightLight": 400,
-    "fontWeightRegular": 500,
-    "fontWeightMedium": 700,
-    "fontWeightBold": 900,
-   }
-});
-
-const drawerWidth = 240;
-
+const drawerWidth = 240
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -168,10 +137,20 @@ function Home(){
         <ListItemLink to="/home" primary="Home" />
         <ListItemLink to="/map" primary="Map"/>
       </List>
-      <Paper>
-        <Typography> Hello im paper</Typography>
-      </Paper>
-      <Switch>
+      <div style={{width: '500px'}}>
+        <Paper style={{padding: '20px', margin: '15px'}}>
+          <Typography> Hello im paper</Typography>
+        </Paper>
+        <Button> Im a button </Button>
+        <Button variant="contained" color="primary"> Im a button </Button>
+        <TextField id="standard-basic" label="Standard" />
+        <Switch
+          checked={true}
+          value="checkedA"
+          inputProps={{ 'aria-label': 'secondary checkbox' }}
+        />
+      </div>
+      <SwitchRouter>
         <Route
           path='/home'
           render={(props) => <div>hello</div>}
@@ -182,7 +161,7 @@ function Home(){
           render={(props) => <GoogleMap/>}
           exact
         />
-      </Switch>
+      </SwitchRouter>
     </div>
   )
 }
