@@ -7,7 +7,7 @@ function MapPage() {
 
 
   return (
-    <div style={{height: '100%', width: 'calc(100% - 110px)', border: 'solid'}}>
+    <div style={{height: '100%', width: 'calc(100% - 110px)'}}>
       <GoogleMap/>
       <SearchBar/>
     </div>

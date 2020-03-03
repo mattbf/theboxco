@@ -23,10 +23,10 @@ import {
 } from "@material-ui/core";
 
 import {
-  MailIcon,
+  Map,
   ChevronLeftIcon,
   ChevronRightIcon,
-} from '@material-ui/icons/Mail';
+} from '@material-ui/icons';
 
 import MapPage from './GoogleMaps/MapPage.js';
 
@@ -133,9 +133,9 @@ function Home(){
 
   return(
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
-      <List style={{height: '100%', backgroundColor: '#000008', width: '110px'}}>
+      <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
         <ListItemLink to="/home" primary="Home" />
-        <ListItemLink to="/map" primary="Map"/>
+        <ListItemLink to="/map" primary="Map" icon={<Map />}/>
       </List>
       <SwitchRouter>
         <Route
