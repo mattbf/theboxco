@@ -29,6 +29,7 @@ import {
 } from '@material-ui/icons';
 
 import MapPage from './GoogleMaps/MapPage.js';
+import GoogleMap from './GoogleMaps/GoogleMap.js';
 
 import {
   BrowserRouter as Router,
@@ -159,7 +160,7 @@ function Home(){
         />
         <Route
           path='/map'
-          render={(props) => <MapPage/>}
+          render={(props) => <GoogleMap/>}
           exact
         />
       </SwitchRouter>

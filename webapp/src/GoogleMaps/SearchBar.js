@@ -34,8 +34,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomizedInputBase() {
+export default function SearchBar(props) {
   const classes = useStyles();
+  const getCurrentLocation = props.getCurrentLocation
 
   return (
     <Paper component="form" className={classes.root}>
@@ -51,7 +52,7 @@ export default function CustomizedInputBase() {
         <SearchIcon />
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton color="primary" className={classes.iconButton} aria-label="directions">
+      <IconButton color="primary" className={classes.iconButton} aria-label="directions" onClick={() => getCurrentLocation()}>
         <DirectionsIcon />
       </IconButton>
     </Paper>
