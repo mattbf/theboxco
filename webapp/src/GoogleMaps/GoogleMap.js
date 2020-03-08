@@ -3,13 +3,18 @@ import React, { useEffect, useState, createRef } from 'react'
 import GoogleMapReact from 'google-map-react';
 import SearchBar from './SearchBar.js';
 
+import {
+  Place
+} from '@material-ui/icons';
+
 var GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY
 
-function GoogleMap() {
+function GoogleMap(props) {
   // var googleMapRef = React.createRef()
   // var googleMap
   // var marker
   var infoWindow, map
+  const openMenu = props.openMenu
   //console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY)
 
   //init google map
@@ -49,6 +54,7 @@ function GoogleMap() {
     lng: 30.33
   })
   const [zoom, setZoom] = useState(11)
+  const [loadLocation, setLoadLocation] = useState(false)
 
   const handleApiLoaded = (map, maps) => {
   // use map and maps objects
@@ -59,6 +65,7 @@ function GoogleMap() {
 
 
 function getCurrentLocation(){
+  setLoadLocation(true)
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -70,7 +77,9 @@ function getCurrentLocation(){
       //infoWindow.setContent('Location found.');
       //infoWindow.open(map);
       console.log(pos)
+      setZoom(1)
       setMapState(pos)
+      setLoadLocation(false)
       return(pos)
 
       //map.setCenter(pos);
@@ -90,6 +99,7 @@ function getCurrentLocation(){
   useEffect(() => {
     console.log("map state changed")
     console.log(mapState)
+    console.log(zoom)
   }, [mapState])
 
 
@@ -104,13 +114,19 @@ function getCurrentLocation(){
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
         <div
-          lat={59.955413}
-          lng={30.337844}
+
           text="My Marker"
-          style={{backgroundColor: '#00c676', width: '50px', height: '50px'}}
-        />
+
+        >
+          <Place
+            color="primary"
+            lat={mapState.lat}
+            lng={mapState.lng}
+            style={{width: '2.5%'}}
+          />
+        </div>
       </GoogleMapReact>
-      <SearchBar getCurrentLocation={getCurrentLocation}/>
+      <SearchBar getCurrentLocation={getCurrentLocation} loadLocation={loadLocation} openMenu={openMenu}/>
     </div>
   )
 }

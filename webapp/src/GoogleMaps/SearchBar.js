@@ -1,11 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+
+import {
+  IconButton,
+  Paper,
+  InputBase,
+  Divider,
+  CircularProgress
+} from "@material-ui/core";
+
+import {
+  Search,
+  MyLocation,
+  Menu
+} from '@material-ui/icons';
 import DirectionsIcon from '@material-ui/icons/Directions';
 
 const useStyles = makeStyles(theme => ({
@@ -37,11 +45,13 @@ const useStyles = makeStyles(theme => ({
 export default function SearchBar(props) {
   const classes = useStyles();
   const getCurrentLocation = props.getCurrentLocation
+  const loadLocation = props.loadLocation
+  const openMenu = props.openMenu
 
   return (
     <Paper component="form" className={classes.root}>
-      <IconButton className={classes.iconButton} aria-label="menu">
-        <MenuIcon />
+      <IconButton className={classes.iconButton} aria-label="menu" onClick={() => openMenu()}>
+        <Menu />
       </IconButton>
       <InputBase
         className={classes.input}
@@ -49,12 +59,18 @@ export default function SearchBar(props) {
         inputProps={{ 'aria-label': 'search google maps' }}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
-        <SearchIcon />
+        <Search />
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton color="primary" className={classes.iconButton} aria-label="directions" onClick={() => getCurrentLocation()}>
-        <DirectionsIcon />
-      </IconButton>
+      {
+        loadLocation == null ?
+        <CircularProgress color="primary" className={classes.iconButton} />
+        :
+        <IconButton color="primary" className={classes.iconButton} aria-label="directions" onClick={() => getCurrentLocation()}>
+          <MyLocation />
+        </IconButton>
+      }
+
     </Paper>
   );
 }

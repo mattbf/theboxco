@@ -134,10 +134,12 @@ function Home(){
 
   return(
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
-      <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
-        <ListItemLink to="/home" primary="Home" />
-        <ListItemLink to="/map" primary="Map" icon={<Map />}/>
-      </List>
+      <Drawer open={open} onClose={handleDrawerClose}>
+        <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
+          <ListItemLink to="/home" primary="Home" />
+          <ListItemLink to="/map" primary="Map" icon={<Map />}/>
+        </List>
+      </Drawer>
       <SwitchRouter>
         <Route
           path='/home'
@@ -160,7 +162,7 @@ function Home(){
         />
         <Route
           path='/map'
-          render={(props) => <GoogleMap/>}
+          render={(props) => <GoogleMap openMenu={handleDrawerOpen}/>}
           exact
         />
       </SwitchRouter>
