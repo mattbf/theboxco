@@ -110,6 +110,10 @@ function getCurrentLocation(){
       console.log(pos)
       setZoom(14)
       setMapState(pos)
+      setMarker({
+        lat: pos.lat,
+        lng: pos.lng
+      })
       setLoadLocation(false)
       return(pos)
 
@@ -129,6 +133,7 @@ function getCurrentLocation(){
 
   useEffect(() => {
     console.log("map state changed")
+    console.log(marker)
     // console.log(mapState)
     // console.log(zoom)
     // console.log(marker)
@@ -141,6 +146,8 @@ function getCurrentLocation(){
     setZoom(zoom);
   }
 
+const K_SIZE = 40
+
   return (
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
     <GoogleMapReact
@@ -150,19 +157,20 @@ function getCurrentLocation(){
 
       onBoundsChange={BoundsChange}
     >
-      <div
-
-        text="My Marker"
-
-      >
         <Place
           color="primary"
-          lat={59.955413} //marker.lat
-          lng={30.337844}
-          style={{width: '2.5%'}}
+          lat={marker.lat}
+          lng={marker.lng}
+          style={{
+            width: '2.5%',
+            position: 'absolute',
+            width: K_SIZE,
+            height: K_SIZE,
+            left: -K_SIZE / 2,
+            top: -K_SIZE / 2,
+          }}
           onClick={ToggleMenu}
         />
-      </div>
     </GoogleMapReact>
       <SearchBar getCurrentLocation={getCurrentLocation} loadLocation={loadLocation} openMenu={openMenu}/>
       <Drawer
