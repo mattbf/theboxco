@@ -4,6 +4,12 @@ import GoogleMapReact from 'google-map-react';
 import SearchBar from './SearchBar.js';
 
 import {
+  Drawer,
+  ListItem,
+  List
+} from "@material-ui/core";
+
+import {
   Place
 } from '@material-ui/icons';
 
@@ -62,6 +68,16 @@ function GoogleMap(props) {
   console.log(maps)
   infoWindow = new google.maps.InfoWindow;
   };
+
+  const[sideInfoOpen, setSideInfoOpen] = useState(false)
+
+  const ToggleMenu = () => {
+    setSideInfoOpen(!sideInfoOpen)
+  }
+
+  const handleDrawerClose = () => {
+    setSideInfoOpen(false)
+  }
 
 
 function getCurrentLocation(){
@@ -127,6 +143,17 @@ function getCurrentLocation(){
         </div>
       </GoogleMapReact>
       <SearchBar getCurrentLocation={getCurrentLocation} loadLocation={loadLocation} openMenu={openMenu}/>
+      <Drawer
+        open={sideInfoOpen}
+        onClose={handleDrawerClose}
+        variant="persistent"
+        anchor="right"
+        >
+        <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
+
+          <ListItem primary="Map" />
+        </List>
+      </Drawer>
     </div>
   )
 }

@@ -26,6 +26,7 @@ import {
   Map,
   ChevronLeftIcon,
   ChevronRightIcon,
+  Home as HomeIcon
 } from '@material-ui/icons';
 
 import MapPage from './GoogleMaps/MapPage.js';
@@ -37,6 +38,8 @@ import {
   Switch as SwitchRouter
 } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
+
+import Logo from './Assets/boxcologo_white.png'
 
 const drawerWidth = 240
 
@@ -140,7 +143,11 @@ function Home(){
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
       <Drawer open={open} onClose={handleDrawerClose} variant="persistent">
         <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
-          <ListItemLink to="/home" primary="Home" />
+          <ListItem>
+            <img src={Logo} style={{width: '75px'}}/>
+          </ListItem>
+          <Divider style={{marginBottom: '20px', marginTop: '10px'}}/>
+          <ListItemLink to="/home" primary="Home" icon={<HomeIcon />}/>
           <ListItemLink to="/map" primary="Map" icon={<Map />}/>
         </List>
       </Drawer>
