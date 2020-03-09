@@ -69,13 +69,14 @@ function GoogleMap(props) {
   const [loadLocation, setLoadLocation] = useState(false)
 
   const handleApiLoaded = (map, maps) => {
-  // use map and maps objects
-  console.log(map)
-  console.log(maps)
-  infoWindow = new google.maps.InfoWindow;
+    // use map and maps objects
+    console.log(map)
+    console.log(maps)
+    infoWindow = new google.maps.InfoWindow;
+    getCurrentLocation()
   };
 
-  const[sideInfoOpen, setSideInfoOpen] = useState(true)
+  const[sideInfoOpen, setSideInfoOpen] = useState(false)
 
   const ToggleMenu = () => {
     setSideInfoOpen(!sideInfoOpen)
@@ -145,6 +146,7 @@ function getCurrentLocation(){
             lat={mapState.lat}
             lng={mapState.lng}
             style={{width: '2.5%'}}
+            onClick={ToggleMenu}
           />
         </div>
       </GoogleMapReact>
