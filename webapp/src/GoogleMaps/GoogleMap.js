@@ -67,6 +67,10 @@ function GoogleMap(props) {
   })
   const [zoom, setZoom] = useState(11)
   const [loadLocation, setLoadLocation] = useState(false)
+  const [marker, setMarker] = useState({
+    lat: '49.2643993',
+    lng: '-123.2318585'
+  })
 
   const handleApiLoaded = (map, maps) => {
     // use map and maps objects
@@ -100,7 +104,7 @@ function getCurrentLocation(){
       //infoWindow.setContent('Location found.');
       //infoWindow.open(map);
       console.log(pos)
-      setZoom(1)
+      setZoom(14)
       setMapState(pos)
       setLoadLocation(false)
       return(pos)
@@ -125,16 +129,22 @@ function getCurrentLocation(){
     console.log(zoom)
   }, [mapState])
 
+  const BoundsChange = (center, zoom) => {
+    setMapState(center);
+    setZoom(zoom);
+  }
 
   return (
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
-        defaultCenter={mapState}
+        
         center={mapState}
-        defaultZoom={zoom}
+        zoom={zoom}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+
+        onBoundsChange={BoundsChange}
       >
         <div
 
@@ -143,8 +153,8 @@ function getCurrentLocation(){
         >
           <Place
             color="primary"
-            lat={mapState.lat}
-            lng={mapState.lng}
+            lat={49.2643993} //marker.lat
+            lng={-123.2318585}
             style={{width: '2.5%'}}
             onClick={ToggleMenu}
           />
