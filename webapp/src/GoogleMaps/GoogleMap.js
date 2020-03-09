@@ -10,7 +10,8 @@ import {
   IconButton,
   Avatar,
   Typography,
-  Divider
+  Divider,
+  Chip
 } from "@material-ui/core";
 
 import {
@@ -127,6 +128,7 @@ function getCurrentLocation(){
     console.log("map state changed")
     console.log(mapState)
     console.log(zoom)
+    console.log(marker)
   }, [mapState])
 
   const BoundsChange = (center, zoom) => {
@@ -138,7 +140,6 @@ function getCurrentLocation(){
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
-        
         center={mapState}
         zoom={zoom}
         yesIWantToUseGoogleMapApiInternals
@@ -171,13 +172,14 @@ function getCurrentLocation(){
             <Close style={{color: '#333'}}/>
           </IconButton>
           <div style={{display: 'flex', flexDirection: 'row', border: 'solid', borderColor: '#000' }}>
-            <Avatar style={{width: '75px', height: '75px'}}>
+            <Avatar style={{width: '75px', height: '75px', margin: '10px'}}>
               <Work />
             </Avatar>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center',}}>
               <Typography style={{color: '#333'}} variant='body1' > Box id: 123456789</Typography>
               <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
             </div>
+            <Chip label="Basic" color="primary" style={{opacity: 0.75}}/>
           </div>
           <div>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center', marginTop: '15px'}}>
