@@ -7,12 +7,16 @@ import {
   Drawer,
   ListItem,
   List,
-  IconButton
+  IconButton,
+  Avatar,
+  Typography,
+  Divider
 } from "@material-ui/core";
 
 import {
   Place,
-  Close
+  Close,
+  Work
 } from '@material-ui/icons';
 
 var GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY
@@ -150,10 +154,31 @@ function getCurrentLocation(){
         onClose={handleDrawerClose}
         anchor="right"
         >
-        <List style={{height: '100%', backgroundColor: '#FFF', width: '400px'}}>
+        <List style={{height: '100%', backgroundColor: '#FFF', width: '400px', padding: '20px'}}>
           <IconButton onClick={handleDrawerClose}>
             <Close style={{color: '#333'}}/>
           </IconButton>
+          <div style={{display: 'flex', flexDirection: 'row', border: 'solid', borderColor: '#000' }}>
+            <Avatar style={{width: '75px', height: '75px'}}>
+              <Work />
+            </Avatar>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center',}}>
+              <Typography style={{color: '#333'}} variant='body1' > Box id: 123456789</Typography>
+              <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
+            </div>
+          </div>
+          <div>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center', marginTop: '15px'}}>
+              <Typography style={{color: '#333'}} variant='subtitle2'> Package Information</Typography>
+              <Divider style={{marginBottom: '10px', backgroundColor: '#333',}}/>
+              <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center', marginTop: '15px'}}>
+              <Typography style={{color: '#333'}} variant='subtitle2'> Package Information</Typography>
+              <Divider style={{marginBottom: '10px', backgroundColor: '#333',}}/>
+              <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
+            </div>
+          </div>
         </List>
       </Drawer>
     </div>
