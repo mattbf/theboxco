@@ -131,10 +131,14 @@ function Home(){
     setOpen(false);
   };
 
+  const ToggleMenu = () => {
+    setOpen(!open)
+  }
+
 
   return(
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
-      <Drawer open={open} onClose={handleDrawerClose}>
+      <Drawer open={open} onClose={handleDrawerClose} variant="persistent">
         <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
           <ListItemLink to="/home" primary="Home" />
           <ListItemLink to="/map" primary="Map" icon={<Map />}/>
@@ -162,7 +166,7 @@ function Home(){
         />
         <Route
           path='/map'
-          render={(props) => <GoogleMap openMenu={handleDrawerOpen}/>}
+          render={(props) => <GoogleMap openMenu={ToggleMenu}/>}
           exact
         />
       </SwitchRouter>
