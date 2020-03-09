@@ -63,7 +63,7 @@ export default function SearchBar(props) {
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
       {
-        loadLocation == null ?
+        loadLocation == true ?
         <CircularProgress color="primary" className={classes.iconButton} />
         :
         <IconButton color="primary" className={classes.iconButton} aria-label="directions" onClick={() => getCurrentLocation()}>

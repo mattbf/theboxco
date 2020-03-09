@@ -23,26 +23,25 @@ import {
 var GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY
 
 function GoogleMap(props) {
-  // var googleMapRef = React.createRef()
-  // var googleMap
+  //var googleMapRef = React.createRef()
+  //var googleMap
   // var marker
   var infoWindow, map
   const openMenu = props.openMenu
   //console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY)
 
-  //init google map
-  //useEffect(() => {
-    // const googleMapScript = document.createElement('script')
-    // googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
-    // window.document.body.appendChild(googleMapScript)
-
-
+  // //init google map
+  // useEffect(() => {
+  //   const googleMapScript = document.createElement('script')
+  //   googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
+  //   window.document.body.appendChild(googleMapScript)
+  //
+  //
   //   googleMapScript.addEventListener('load', function(){
   //     googleMap = createGoogleMap()
   //     marker = createMarker()
   //   })
   // }, [])
-  //
   // const createGoogleMap = () =>{
   //   new window.google.maps.Map(googleMapRef.current, {
   //     zoom: 10,
@@ -53,8 +52,6 @@ function GoogleMap(props) {
   //     disableDefaultUI: true,
   //   })
   // }
-  //
-  //
   // const createMarker = () => {
   //   new window.google.maps.Marker({
   //     position: { lat: 43.642567, lng: -79.387054 },
@@ -63,22 +60,27 @@ function GoogleMap(props) {
   // }
 
   const [mapState, setMapState] = useState({
-    lat: 59.95,
-    lng: 30.33
+    lat: 0.00,
+    lng: 0.00
   })
   const [zoom, setZoom] = useState(11)
   const [loadLocation, setLoadLocation] = useState(false)
   const [marker, setMarker] = useState({
-    lat: '49.2643993',
-    lng: '-123.2318585'
+    lat: '69.2643993',
+    lng: '-100.2318585'
   })
+  const [status, setStatus] = useState("not delivery")
+
+  //load current location
+  useEffect(() =>{
+    getCurrentLocation()
+  }, [])
 
   const handleApiLoaded = (map, maps) => {
     // use map and maps objects
     console.log(map)
     console.log(maps)
-    infoWindow = new google.maps.InfoWindow;
-    getCurrentLocation()
+    //infoWindow = new google.maps.InfoWindow;
   };
 
   const[sideInfoOpen, setSideInfoOpen] = useState(false)
@@ -93,6 +95,7 @@ function GoogleMap(props) {
 
 
 function getCurrentLocation(){
+  console.log("GET LOCACTION")
   setLoadLocation(true)
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -126,41 +129,41 @@ function getCurrentLocation(){
 
   useEffect(() => {
     console.log("map state changed")
-    console.log(mapState)
-    console.log(zoom)
-    console.log(marker)
+    // console.log(mapState)
+    // console.log(zoom)
+    // console.log(marker)
+
   }, [mapState])
 
   const BoundsChange = (center, zoom) => {
+    console.log("bounds change")
     setMapState(center);
     setZoom(zoom);
   }
 
   return (
     <div style={{display: 'flex', height: '100%', width: '100%'}}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
-        center={mapState}
-        zoom={zoom}
-        yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+    <GoogleMapReact
+      bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
+      center={mapState}
+      zoom={zoom}
 
-        onBoundsChange={BoundsChange}
+      onBoundsChange={BoundsChange}
+    >
+      <div
+
+        text="My Marker"
+
       >
-        <div
-
-          text="My Marker"
-
-        >
-          <Place
-            color="primary"
-            lat={49.2643993} //marker.lat
-            lng={-123.2318585}
-            style={{width: '2.5%'}}
-            onClick={ToggleMenu}
-          />
-        </div>
-      </GoogleMapReact>
+        <Place
+          color="primary"
+          lat={59.955413} //marker.lat
+          lng={30.337844}
+          style={{width: '2.5%'}}
+          onClick={ToggleMenu}
+        />
+      </div>
+    </GoogleMapReact>
       <SearchBar getCurrentLocation={getCurrentLocation} loadLocation={loadLocation} openMenu={openMenu}/>
       <Drawer
         open={sideInfoOpen}
@@ -171,7 +174,7 @@ function getCurrentLocation(){
           <IconButton onClick={handleDrawerClose}>
             <Close style={{color: '#333'}}/>
           </IconButton>
-          <div style={{display: 'flex', flexDirection: 'row', border: 'solid', borderColor: '#000' }}>
+          <div style={{display: 'flex', flexDirection: 'row',  }}>
             <Avatar style={{width: '75px', height: '75px', margin: '10px'}}>
               <Work />
             </Avatar>
@@ -179,17 +182,18 @@ function getCurrentLocation(){
               <Typography style={{color: '#333'}} variant='body1' > Box id: 123456789</Typography>
               <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
             </div>
-            <Chip label="Basic" color="primary" style={{opacity: 0.75}}/>
+            <Chip label={status == "delivery" ? "On Route" : "Not in use"} style={status == "delivery" ? {backgroundColor: 'rgb(41,121,255,0.85)'} : null }/>
           </div>
           <div>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center', marginTop: '15px'}}>
               <Typography style={{color: '#333'}} variant='subtitle2'> Package Information</Typography>
-              <Divider style={{marginBottom: '10px', backgroundColor: '#333',}}/>
+              <Divider style={{marginBottom: '10px', backgroundColor: '#003333',}}/>
+              <Typography style={{color: '#333'}} variant='body1' > Current Location: some location</Typography>
               <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
             </div>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flexStart', justifyContent: 'center', marginTop: '15px'}}>
               <Typography style={{color: '#333'}} variant='subtitle2'> Package Information</Typography>
-              <Divider style={{marginBottom: '10px', backgroundColor: '#333',}}/>
+              <Divider style={{marginBottom: '10px', backgroundColor: '#003333',}}/>
               <Typography style={{color: '#333'}} variant='body1' > Destination: 123 Address Street</Typography>
             </div>
           </div>
@@ -200,6 +204,9 @@ function getCurrentLocation(){
 }
 
 export default GoogleMap
+
+
+
 
 //
 // <div
