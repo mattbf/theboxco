@@ -105,16 +105,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ListItemLink(props) {
-  const { icon, primary, to } = props;
+  const { icon, primary, to, handleClose } = props;
 
   const renderLink = React.useMemo(
-    () => React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
+    () =>
+      React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
     [to],
   );
 
+  const closeMenu = () => {
+    handleClose()
+  }
+
   return (
     <li>
-      <ListItem button component={renderLink}>
+      <ListItem button component={renderLink} onClick={() => closeMenu()}>
         {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
         <ListItemText primary={primary} />
       </ListItem>
@@ -147,8 +152,8 @@ function Home(){
             <img src={Logo} style={{width: '75px'}}/>
           </ListItem>
           <Divider style={{marginBottom: '20px', marginTop: '10px'}}/>
-          <ListItemLink to="/home" primary="Home" icon={<HomeIcon />}/>
-          <ListItemLink to="/map" primary="Map" icon={<Map />}/>
+          <ListItemLink to="/home" primary="Home" icon={<HomeIcon />} handleClose={handleDrawerClose}/>
+          <ListItemLink to="/map" primary="Map" icon={<Map />} handleClose={handleDrawerClose}/>
         </List>
       </Drawer>
       <SwitchRouter>

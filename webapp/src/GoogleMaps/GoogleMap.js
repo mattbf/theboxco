@@ -6,11 +6,13 @@ import SearchBar from './SearchBar.js';
 import {
   Drawer,
   ListItem,
-  List
+  List,
+  IconButton
 } from "@material-ui/core";
 
 import {
-  Place
+  Place,
+  Close
 } from '@material-ui/icons';
 
 var GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY
@@ -69,7 +71,7 @@ function GoogleMap(props) {
   infoWindow = new google.maps.InfoWindow;
   };
 
-  const[sideInfoOpen, setSideInfoOpen] = useState(false)
+  const[sideInfoOpen, setSideInfoOpen] = useState(true)
 
   const ToggleMenu = () => {
     setSideInfoOpen(!sideInfoOpen)
@@ -146,12 +148,12 @@ function getCurrentLocation(){
       <Drawer
         open={sideInfoOpen}
         onClose={handleDrawerClose}
-        variant="persistent"
         anchor="right"
         >
-        <List style={{height: '100%', backgroundColor: '#000008', width: '150px'}}>
-
-          <ListItem primary="Map" />
+        <List style={{height: '100%', backgroundColor: '#FFF', width: '400px'}}>
+          <IconButton onClick={handleDrawerClose}>
+            <Close style={{color: '#333'}}/>
+          </IconButton>
         </List>
       </Drawer>
     </div>
