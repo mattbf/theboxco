@@ -2,6 +2,7 @@
 import React, { useEffect, useState, createRef } from 'react'
 import GoogleMapReact from 'google-map-react';
 import SearchBar from './SearchBar.js';
+import axios from 'axios'
 
 import {
   Drawer,
@@ -59,6 +60,8 @@ function GoogleMap(props) {
   //   })
   // }
 
+  var directionsService
+  var directionsRenderer
   const [mapState, setMapState] = useState({
     lat: 0.00,
     lng: 0.00
@@ -70,17 +73,60 @@ function GoogleMap(props) {
     lng: '-100.2318585'
   })
   const [status, setStatus] = useState("not delivery")
+  const [googleMap, setGoogleMap] = useState(null)
+  const [directionsObj, setDirectionsObj] = useState({
+  origin: 'Chicago, IL',
+  destination: 'Los Angeles, CA',
+  waypoints: [
+    {
+      location: 'Joplin, MO',
+      stopover: false
+    },{
+      location: 'Oklahoma City, OK',
+      stopover: true
+    }],
+  provideRouteAlternatives: false,
+  travelMode: 'DRIVING',
+})
 
-  //load current location
+  //load directions
   useEffect(() =>{
-    getCurrentLocation()
-  }, [])
+    // axios.get(`http://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=${GOOGLE_MAP_API_KEY}`)
+    //   .then(function (response) {
+    //   // handle success
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     // handle error
+    //     console.log(error);
+    //   })
+    if(googleMap !== null){
+      console.log("map obj")
+      console.log(googleMap)
+      //googleMap.DirectionsService(`http://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=${GOOGLE_MAP_API_KEY}`)
+
+      googleMap.DirectionsService(directionsObj, function(result, status) {
+        console.log("req made")
+        if (status == 'OK') {
+          console.log(result)
+          //directionsRenderer.setDirections(result);
+        } else {
+          console.log(result)
+        }
+      });
+    }
+
+
+  }, [googleMap])
 
   const handleApiLoaded = (map, maps) => {
     // use map and maps objects
-    console.log(map)
-    console.log(maps)
-    //infoWindow = new google.maps.InfoWindow;
+    console.log("map loaded")
+    //console.log(map)
+    //console.log(maps)
+    setGoogleMap(maps)
+
+    getCurrentLocation()
   };
 
   const[sideInfoOpen, setSideInfoOpen] = useState(false)
@@ -95,7 +141,7 @@ function GoogleMap(props) {
 
 
 function getCurrentLocation(){
-  console.log("GET LOCACTION")
+  //console.log("GET LOCACTION")
   setLoadLocation(true)
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -132,8 +178,8 @@ function getCurrentLocation(){
 }
 
   useEffect(() => {
-    console.log("map state changed")
-    console.log(marker)
+    //console.log("map state changed")
+    //console.log(marker)
     // console.log(mapState)
     // console.log(zoom)
     // console.log(marker)
@@ -141,7 +187,7 @@ function getCurrentLocation(){
   }, [mapState])
 
   const BoundsChange = (center, zoom) => {
-    console.log("bounds change")
+    //console.log("bounds change")
     setMapState(center);
     setZoom(zoom);
   }
@@ -154,9 +200,11 @@ const K_SIZE = 40
       bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
       center={mapState}
       zoom={zoom}
-
       onBoundsChange={BoundsChange}
+      yesIWantToUseGoogleMapApiInternals
+      onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
     >
+      <div>
         <Place
           color="primary"
           lat={marker.lat}
@@ -171,6 +219,7 @@ const K_SIZE = 40
           }}
           onClick={ToggleMenu}
         />
+      </div>
     </GoogleMapReact>
       <SearchBar getCurrentLocation={getCurrentLocation} loadLocation={loadLocation} openMenu={openMenu}/>
       <Drawer
